@@ -31,7 +31,8 @@ const Checkout = () => {
     setError('');
     setIsSubmitting(true);
     try {
-      await axios.post('http://localhost:5000/api/auth/register-checkout', { name, mobile, email });
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      await axios.post(`${API_BASE_URL}/auth/register-checkout`, { name, mobile, email });
       setStep('payment');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to initialize checkout. Please try again.');
